@@ -14,7 +14,7 @@ Impact of moving a mobile game progression gate on retention & engagement
 
 **Decision:** _Do not roll out._ While the result is statistically significant, the effect is negative and below the practical threshold.
 
-[See the report](reports/report.md)
+[See the report](reports/report.pdf)
 
 ## Dataset
 
