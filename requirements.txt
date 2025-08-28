@@ -1,0 +1,8 @@
+python 3.11
+pandas
+numpy
+math
+scipy
+statsmodels
+matplotlib
+seaborn
