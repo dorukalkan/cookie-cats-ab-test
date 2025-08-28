@@ -10,7 +10,9 @@ Impact of moving a mobile game progression gate on retention & engagement
 
 **Primary metric:** Day‑7 retention (``retention_7``).
 
-**Result:** Moving gate to level 40 **reduces day-7 retention by ~0.8 pp** (p < 0.05), which is below the pre‑specified 1.0 pp MDE.
+**Guardrail metrics:** Day-1 retention (``retention_1``) and engagement (``sum_gamerounds``).
+
+**Result:** Moving gate to level 40 **reduces day-7 retention by ~0.8 pp** (p < 0.05), which is negative and below the pre‑specified 1.0 pp MDE. Tests on guardrails indicate an insignificant difference.
 
 **Decision:** _Do not roll out._ While the result is statistically significant, the effect is negative and below the practical threshold.
 
@@ -35,7 +37,7 @@ Contains approximately 90k players (each row corresponding to 1 player), balance
 **Population:** ``gate_30`` and ``gate_40`` players, with a balanced split of approximately 45k records (checked by SRM test).
 
 **Primary metric:**
-- Day-7 retention (``retention_7``): Two‑proportion z‑test
+- Day-7 retention (``retention_7``): Two‑proportion z‑test  
 Retention at day 7 is considered as a significant indicator of LTV in the industry.
 
 **Guardrail metrics:**
