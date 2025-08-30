@@ -12,7 +12,7 @@ Impact of moving a mobile game progression gate on retention & engagement
 
 **Guardrail metrics:** Day-1 retention (``retention_1``) and engagement (``sum_gamerounds``).
 
-**Result:** Moving gate to level 40 **reduces day-7 retention by ~0.8 pp** (p < 0.05), which is negative and below the pre‑specified 1.0 pp MDE. Tests on guardrails indicate an insignificant difference.
+**Result:** Moving gate to level 40 **reduces day-7 retention by ~0.8 pp** (p < 0.05) with 95% CI [-1.33, -0.31] pp, which is negative and below the pre‑specified 1.0 pp MDE. Tests on guardrails indicate an insignificant difference.
 
 **Decision:** _Do not roll out._ While the result is statistically significant, the effect is negative and below the practical threshold.
 
@@ -65,9 +65,9 @@ Retention at day 7 is considered as a significant indicator of LTV in the indust
 - Guardrail p-values are Holm-adjusted.
 - Cohen’s h = 0.02 for the primary metric, which is negligible in standardized magnitude (below the conventional threshold of 0.20 for a small effect).
 
-**Interpretation:**
+**Interpretation:**  
 The difference in primary metric (``retention_7``) is statistically significant (p=0.0016). The treatment group (``gate_40``) shows a −0.82 pp decrease in day-7 retention compared to control (``gate_30``) with 95% CI [-1.33, -0.31] pp, corresponding to a -4.3% relative drop.
-While the result is statistically significant, the effect is negative and below the practical threshold of 1.0 pp. Cohen's h = 0.02 indicates that the magnitude of this effect is negligible. Even though this negative effect is minimal, rollous is not recommended.
+While the result is statistically significant, the effect is negative and below the practical threshold of 1.0 pp. Cohen's h = 0.02 indicates that the magnitude of this effect is negligible. Even though this negative effect is minimal, rollout is not recommended.
 
 ![Retention bar chart](reports/figures/4.3_retention_rates_by_version_95_ci.png)
 
