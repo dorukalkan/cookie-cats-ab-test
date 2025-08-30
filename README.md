@@ -34,7 +34,7 @@ Contains approximately 90k players (each row corresponding to 1 player), balance
 
 ## Experiment Design
 
-**Population:** ``gate_30`` and ``gate_40`` players, with a balanced split of approximately 45k records (checked by SRM test).
+**Population:** ``gate_30`` and ``gate_40`` players, with a split of approximately 45k records (checked by SRM test).
 
 **Primary metric:**
 - Day-7 retention (``retention_7``): Two‑proportion z‑test  
