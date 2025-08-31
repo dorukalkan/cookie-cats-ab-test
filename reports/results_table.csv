@@ -1,6 +1,6 @@
 Metric,Control (gate_30),Treatment (gate_40),Absolute Δ,Statistic,p-value,Adjusted p-value,Notes
-Day-7 Retention (Primary),"0.19 95% CI [0.1866, 0.1939]","0.18 95% CI [0.1785, 0.1856]","-0.82 pp [-1.33, -0.31]",z = 3.164359,0.001554249975614329,,"Relative Δ: -4.31%, Cohen's h: 0.021074"
-Day-1 Retention,"0.45 95% CI [0.4436, 0.4528]","0.44 95% CI [0.4377, 0.4469]","-0.59 pp [-1.24, 0.06]",z = 1.784086,0.07440965529691913,0.15062642316132763,Holm-adjusted within guardrail family
-Game rounds (MWU),"mean = 52.46, median = 17.00","mean = 51.30, median = 16.00",-1.16,U = 1024331250,0.05020880772044255,0.15062642316132763,"Heavy-tailed, non-parametric"
-"Game rounds (log1p, Welch t)",mean = 2.8889,mean = 2.8707,,t = 1.8142,0.06964323357672911,0.15062642316132763,Log scale to normalize distribution
+Day-7 Retention (Primary),"0.19 95% CI [0.1866, 0.1939]","0.18 95% CI [0.1785, 0.1856]","-0.82 pp [-1.33, -0.31]",z = 3.164359,0.001554,,"Relative Δ: -4.31%, Cohen's h: 0.021074"
+Day-1 Retention,"0.45 95% CI [0.4436, 0.4528]","0.44 95% CI [0.4377, 0.4469]","-0.59 pp [-1.24, 0.06]",z = 1.784086,0.074410,0.150626,Holm-adjusted within guardrail family
+Game rounds (MWU),"mean = 52.46, median = 17.00","mean = 51.30, median = 16.00",-1.16,U = 1024331250,0.050209,0.150626,"Heavy-tailed, non-parametric"
+"Game rounds (log1p, Welch t)",mean = 2.8889,mean = 2.8707,,t = 1.814246,0.069643,0.150626,Log scale to normalize distribution
 Bootstrap delta mean rounds,52.91,51.39,-1.16,"95% CI for mean difference: [-1.04, 4.05]",,,
