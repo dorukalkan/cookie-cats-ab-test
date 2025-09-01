@@ -52,7 +52,11 @@ Retention at day 7 is considered as a significant indicator of LTV in the indust
 
 **Decision rule:** Rollout only if the result is statistically significant, the experiment effect is larger than 1.0 pp, and guardrails do not display any negative effect.
 
-## Key Results
+**Sample Ratio Mismatch check:** Chi-square test (alpha = 0.001) on assignment counts
+
+## Results
+
+Chi-square p = 0.008 passes SRM check but it is in a cautionary range.
 
 | Metric          | Test             | Control | Treatment | Abs Δ (pp/unit)   | p-value |
 | --------------- | ---------------- | ------- | --------- | ----------------- | ------- |
@@ -64,6 +68,8 @@ Retention at day 7 is considered as a significant indicator of LTV in the indust
 **Note:** 
 - Guardrail p-values are Holm-adjusted.
 - Cohen’s h = 0.02 for the primary metric, which is negligible in standardized magnitude (below the conventional threshold of 0.20 for a small effect).
+
+[See table in detail](reports/results_table.csv)
 
 **Interpretation:**  
 The difference in primary metric (``retention_7``) is statistically significant (p=0.0016). The treatment group (``gate_40``) shows a −0.82 pp decrease in day-7 retention compared to control (``gate_30``) with 95% CI [-1.33, -0.31] pp, corresponding to a -4.3% relative drop.
@@ -88,7 +94,7 @@ The dataset does not indicate whether players actually reached the gate level. S
 
 ## How to Run
 
-````
+```
 pip install -r requirements.txt
 jupyter notebook cookie_cats.ipynb
-````
+```
