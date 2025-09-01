@@ -8,11 +8,11 @@ Impact of moving a mobile game progression gate on retention & engagement
 
 **Business question:** Does moving the gate from level 30 → 40 affect player retention and engagement?
 
-**Primary metric:** Day‑7 retention (``retention_7``).
+**Primary metric:** Day‑7 retention (`retention_7`).
 
-**Guardrail metrics:** Day-1 retention (``retention_1``) and engagement (``sum_gamerounds``).
+**Guardrail metrics:** Day-1 retention (`retention_1`) and engagement (`sum_gamerounds`).
 
-**Result:** Moving gate to level 40 **reduces day-7 retention by ~0.8 pp** (p < 0.05) with 95% CI [-1.33, -0.31] pp, which is negative and below the pre‑specified 1.0 pp MDE. Tests on guardrails indicate an insignificant difference.
+**Result:** Moving gate to level 40 **reduces day-7 retention by ~0.8 pp** (_p_ < 0.05) with 95% CI [-1.33, -0.31] pp, which is negative and below the pre‑specified 1.0 pp MDE. Tests on guardrails indicate an insignificant difference.
 
 **Decision:** _Do not roll out._ While the result is statistically significant, the effect is negative and below the practical threshold.
 
@@ -23,7 +23,7 @@ Impact of moving a mobile game progression gate on retention & engagement
 | column | data type | description | 
 |--------|-----------|-------------|
 | `userid` | `int` | Unique player ID |
-| `version` | `str` | Experiment split (``gate_30`` = control, ``gate_40`` = treatment) |
+| `version` | `str` | Experiment split (`gate_30` = control, `gate_40` = treatment) |
 | `sum_gamerounds` | `int` | Total rounds per player |
 | `retention_1` | `bool` | Active 1 day after installing the game |
 | `retention_7` | `bool` | Active 7 days after installing the game |
@@ -34,29 +34,29 @@ Contains approximately 90k players (each row corresponding to 1 player), balance
 
 ## Experiment Design
 
-**Population:** ``gate_30`` and ``gate_40`` players, with a split of approximately 45k records (checked by SRM test).
+**Population:** `gate_30` and `gate_40` players, with a split of approximately 45k records (checked by SRM test).
 
 **Primary metric:**
-- Day-7 retention (``retention_7``): Two‑proportion z‑test  
+- Day-7 retention (`retention_7`): Two‑proportion z‑test  
 Retention at day 7 is considered as a significant indicator of LTV in the industry.
 
 **Guardrail metrics:**
-- Day-1 retention (``retention_1``): Two-proportion z‑test
-- Engagement (``sum_gamerounds``): Mann–Whitney U test and Welch's t-test on log-transformed data
+- Day-1 retention (`retention_1`): Two-proportion z‑test
+- Engagement (`sum_gamerounds`): Mann–Whitney U test and Welch's t-test on log-transformed data
 
 **Power / MDE:** 80% power target, 1.0 pp MDE. Observed sample size achieves 0.74 pp MDE, a smaller detectable effect than the designed 1.0 pp MDE at 80% power.
 
-**Significance level:** Pre-specified as 5% (alpha = 0.05) with 95% CI
+**Significance level:** Pre-specified as 5% (_alpha_ = 0.05) with 95% CI
 
 **Multiple testing correction:** Guardrails adjusted via Holm method
 
 **Decision rule:** Rollout only if the result is statistically significant, the experiment effect is larger than 1.0 pp, and guardrails do not display any negative effect.
 
-**Sample Ratio Mismatch check:** Chi-square test (alpha = 0.001) on assignment counts
+**Sample Ratio Mismatch check:** Chi-square test (_alpha_ = 0.001) on assignment counts
 
 ## Results
 
-Chi-square p = 0.008 passes SRM check but it is in a cautionary range.
+Chi-square _p_ = 0.008 passes SRM check but it is in a cautionary range.
 
 | Metric          | Test             | Control | Treatment | Abs Δ (pp/unit)   | p-value |
 | --------------- | ---------------- | ------- | --------- | ----------------- | ------- |
@@ -67,13 +67,13 @@ Chi-square p = 0.008 passes SRM check but it is in a cautionary range.
 
 **Note:** 
 - Guardrail p-values are Holm-adjusted.
-- Cohen’s h = 0.02 for the primary metric, which is negligible in standardized magnitude (below the conventional threshold of 0.20 for a small effect).
+- Cohen’s _h_ = 0.02 for the primary metric, which is negligible in standardized magnitude (below the conventional threshold of 0.20 for a small effect).
 
-[See table in detail](reports/results_table.csv)
+[See the table in detail](reports/results_table.csv)
 
 **Interpretation:**  
-The difference in primary metric (``retention_7``) is statistically significant (p=0.0016). The treatment group (``gate_40``) shows a −0.82 pp decrease in day-7 retention compared to control (``gate_30``) with 95% CI [-1.33, -0.31] pp, corresponding to a -4.3% relative drop.
-While the result is statistically significant, the effect is negative and below the practical threshold of 1.0 pp. Cohen's h = 0.02 indicates that the magnitude of this effect is negligible. Even though this negative effect is minimal, rollout is not recommended.
+The difference in primary metric (`retention_7`) is statistically significant (_p_ = 0.0016). The treatment group (`gate_40`) shows a −0.82 pp decrease in day-7 retention compared to control (`gate_30`) with 95% CI [-1.33, -0.31] pp, corresponding to a -4.3% relative drop.
+While the result is statistically significant, the effect is negative and below the practical threshold of 1.0 pp. Cohen's _h_ = 0.02 indicates that the magnitude of this effect is negligible. Even though this negative effect is minimal, rollout is not recommended.
 
 ![Retention bar chart](reports/figures/4.3_retention_rates_by_version_95_ci.png)
 
@@ -83,14 +83,17 @@ Per 100k installs, the test result indicates **820 fewer players** retained by d
 
 ## Limitations & Next Steps
 
-The dataset does not indicate whether players actually reached the gate level. Some players may not have been exposed, which can dilute test results. Future experiments should condition on gate exposure.
+The dataset does not indicate whether players actually reached the gate level. Some players may not have been exposed, which can dilute test results. Sensitivity analysis implies that the observed effect of day-7 retention would be -1.64 pp with 95% [-2.66, 0.62] if only half the players have reached the gate level (see [report](reports/report.pdf)). Future experiments should condition on gate exposure.
+
+[See the exposure sensitivity table](reports/exposure_sensitivity.csv)
 
 ## Repository Structure
 
-- ``notebook/cookie_cats.ipynb``: main notebook containing EDA, sanity checks, tests, visualization
-- ``reports/results_table.csv``: experiment results table as CSV
-- ``reports/report.pdf``: experiment report as PDF
-- ``reports/figures/``: plots folder (png images)
+- `notebook/cookie_cats.ipynb`: main notebook containing EDA, sanity checks, tests, visualization
+- `reports/results_table.csv`: experiment results table as CSV
+- `reports/exposure_sensitivity.csv`: sensitivity analysis results table as CSV
+- `reports/report.pdf`: experiment report as PDF
+- `reports/figures/`: plots folder (png images)
 
 ## How to Run
 
