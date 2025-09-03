@@ -3,7 +3,9 @@ import numpy as np
 import matplotlib.pyplot as plt
 import matplotlib.ticker as mtick
 import seaborn as sns
-from statsmodels.stats.proportion import proportion_confint
+from statsmodels.stats.power import NormalIndPower
+from statsmodels.stats.proportion import proportion_confint, proportion_effectsize
+from .stats import h_to_p1
 
 
 # Set uniform style for all plots
@@ -255,11 +257,30 @@ def plot_game_rounds_dist(df: pd.DataFrame, log: bool = False):
         plt.show()
 
 
+def prepare_axes_power_vs_mde(p0, nob, alpha):
+    mde_points = np.linspace(0, 2.5, 51)
+    powers = []
+    for pp in mde_points:
+        p1 = min(max(p0 + pp / 100.0, 1e-9), 1 - 1e-9)
+        effectsize = proportion_effectsize(p1, p0)
+        power_analysis = NormalIndPower()
+        pw = power_analysis.solve_power(
+            effect_size=effectsize,
+            nobs1=nob,
+            alpha=alpha,
+            ratio=1.0,
+            alternative="two-sided",
+        )
+        powers.append(pw)
+
+    return mde_points, powers
+
+
 # Function to plot power vs. MDE
-def plot_power_vs_mde(
-    mde_points: np.ndarray, powers: np.ndarray, mde_pp_current: float
-):
-    plt.plot(mde_points, powers, color="#6B46C1", linewidth=2)
+def plot_power_vs_mde(p0, nob, mde_pp_current, alpha):
+    axes = prepare_axes_power_vs_mde(p0, nob, alpha)
+
+    plt.plot(axes[0], axes[1], color="#6B46C1", linewidth=2)
     plt.axhline(0.8, linestyle="--", linewidth=1, color="#63B3ED")
 
     # Add point for current MDE
@@ -283,16 +304,38 @@ def plot_power_vs_mde(
     plt.show()
 
 
+def prepare_axes_mde_vs_sample(p0, alpha, power):
+    # Plot — MDE vs n per group (balanced @ 80% power)
+    n_values = np.linspace(5_000, 150_000, 60)  # per-group sizes for planning
+    pp = []
+    for n in n_values:
+        power_analysis = NormalIndPower()
+        effectsize_required = power_analysis.solve_power(
+            effect_size=None,
+            nobs1=n,
+            alpha=alpha,
+            power=power,
+            ratio=1.0,
+            alternative="two-sided",
+        )
+        p1_required = h_to_p1(
+            effectsize_required, p0
+        )  # invert h to get p1, then convert to pp uplift
+        pp.append((p1_required - p0) * 100)
+
+    return n_values, pp
+
+
 # Function to plot MDE vs. Sample Size
-def plot_mde_vs_sample(
-    n_values: np.ndarray, pp: np.ndarray, N: int, mde_pp_current: float
-):
-    plt.plot(n_values, pp, color="#6B46C1", linewidth=2)
-    plt.scatter([N], [mde_pp_current], color="#3182CE", zorder=5)
+def plot_mde_vs_sample(p0, alpha, power, n, mde_pp_current):
+    axes = prepare_axes_mde_vs_sample(p0, alpha, power)
+
+    plt.plot(axes[0], axes[1], color="#6B46C1", linewidth=2)
+    plt.scatter([n], [mde_pp_current], color="#3182CE", zorder=5)
     plt.text(
-        N + 25000,
+        n + 25000,
         mde_pp_current + 0.1,
-        f"Current N = {N}, MDE = {mde_pp_current:.2f} pp",
+        f"Current N = {n}, MDE = {mde_pp_current:.2f} pp",
         ha="center",
         color="#3182CE",
     )
