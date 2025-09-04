@@ -140,3 +140,70 @@ def test_two_prop_z(df, ctrl, treat, col, alpha, p0):
         delta_rel_pct,
         h,
     )
+
+
+def calculate_engagement_stats(df):
+    # Game rounds played per version
+    rounds_ctrl = df[df["version"] == "gate_30"]["sum_gamerounds"]
+    rounds_treat = df[df["version"] == "gate_40"]["sum_gamerounds"]
+
+    # Engagement statistics for context
+    mean_ctrl = rounds_ctrl.mean()
+    median_ctrl = rounds_ctrl.median()
+    mean_treat = rounds_treat.mean()
+    median_treat = rounds_treat.median()
+    delta_mean = mean_treat - mean_ctrl
+
+    # Transform game rounds
+    log_ctrl = np.log1p(rounds_ctrl)
+    log_treat = np.log1p(rounds_treat)
+
+    return (
+        rounds_ctrl,  # 0
+        rounds_treat,  # 1
+        mean_ctrl,  # 2
+        median_ctrl,  # 3
+        mean_treat,  # 4
+        median_treat,  # 5
+        delta_mean,  # 6
+        log_ctrl,  # 7
+        log_treat,  # 8
+    )
+
+
+def test_game_rounds(engagement_stats):
+    # Mann-Whitney U test
+    u_stat, pval_rounds = mannwhitneyu(
+        engagement_stats[0], engagement_stats[1], alternative="two-sided"
+    )
+
+    # Welch's t-test (unequal variances)
+    tstat_log, pval_log = ttest_ind(
+        engagement_stats[7],
+        engagement_stats[8],
+        equal_var=False,
+        alternative="two-sided",
+    )
+
+    return u_stat, pval_rounds, tstat_log, pval_log
+
+
+def bootstrap_mean_diff(rounds_ctrl, rounds_treat):
+    # Simple percentile bootstrap for the mean difference on the raw scale
+    np.random.seed(42)
+    B = 5000
+    boot_diffs = []
+
+    for i in range(B):
+        # Resample with replacement from both groups
+        ctrl_sample_mean = rounds_ctrl.sample(n=len(rounds_ctrl), replace=True).mean()
+        treat_sample_mean = rounds_treat.sample(
+            n=len(rounds_treat), replace=True
+        ).mean()
+        boot_diffs.append(ctrl_sample_mean - treat_sample_mean)
+
+    boot_diffs = np.array(boot_diffs)
+    ci_low, ci_high = np.percentile(boot_diffs, [2.5, 97.5])
+    obs_diff = rounds_treat.mean() - rounds_ctrl.mean()
+
+    return obs_diff, ci_low, ci_high
