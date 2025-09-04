@@ -126,19 +126,19 @@ def test_two_prop_z(df, ctrl, treat, col, alpha, p0):
     h = proportion_effectsize(p0, p1)
 
     return (
-        prop_ctrl,
-        ci_ctrl_low,
-        ci_ctrl_high,
-        prop_treat,
-        ci_treat_low,
-        ci_treat_high,
-        z_stat,
-        pval,
-        delta_abs_pp,
-        ci_delta_low,
-        ci_delta_high,
-        delta_rel_pct,
-        h,
+        prop_ctrl,  # 0
+        ci_ctrl_low,  # 1
+        ci_ctrl_high,  # 2
+        prop_treat,  # 3
+        ci_treat_low,  # 4
+        ci_treat_high,  # 5
+        z_stat,  # 6
+        pval,  # 7
+        delta_abs_pp,  # 8
+        ci_delta_low,  # 9
+        ci_delta_high,  # 10
+        delta_rel_pct,  # 11
+        h,  # 12
     )
 
 
