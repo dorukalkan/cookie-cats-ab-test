@@ -206,7 +206,7 @@ def bootstrap_mean_diff(rounds_ctrl, rounds_treat):
     ci_low, ci_high = np.percentile(boot_diffs, [2.5, 97.5])
     obs_diff = rounds_treat.mean() - rounds_ctrl.mean()
 
-    return obs_diff, ci_low, ci_high
+    return obs_diff, ci_low, ci_high, ctrl_sample_mean, treat_sample_mean
 
 
 def correct_pvals(*args, alpha):
