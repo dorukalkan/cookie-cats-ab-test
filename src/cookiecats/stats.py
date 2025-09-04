@@ -207,3 +207,13 @@ def bootstrap_mean_diff(rounds_ctrl, rounds_treat):
     obs_diff = rounds_treat.mean() - rounds_ctrl.mean()
 
     return obs_diff, ci_low, ci_high
+
+
+def correct_pvals(*args, alpha):
+    # Guardrail p-values
+    guardrail_unadj = [*args]
+
+    # Perform Holm correction
+    guardrail_adj = multipletests(guardrail_unadj, alpha=alpha, method="holm")
+
+    return guardrail_adj
