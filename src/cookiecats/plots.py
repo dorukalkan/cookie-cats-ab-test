@@ -13,15 +13,15 @@ def set_plot_style():
     """Apply uniform style for plotting"""
 
     # Matplotlib parameters
-    plt.rcParams["figure.figsize"] = [10, 6]
-    plt.rcParams["font.size"] = 12
-    plt.rcParams["axes.titlesize"] = 14
-    plt.rcParams["axes.labelsize"] = 12
-    plt.rcParams["xtick.labelsize"] = 10
-    plt.rcParams["ytick.labelsize"] = 10
-    plt.rcParams["legend.fontsize"] = 11
-    plt.rcParams["figure.dpi"] = 300
+    plt.rcParams["figure.figsize"] = [5, 3]
+    plt.rcParams["figure.dpi"] = 200
     plt.rcParams["savefig.dpi"] = 600
+    plt.rcParams["font.size"] = 10
+    plt.rcParams["axes.titlesize"] = 9
+    plt.rcParams["axes.labelsize"] = 8
+    plt.rcParams["xtick.labelsize"] = 6
+    plt.rcParams["ytick.labelsize"] = 6
+    plt.rcParams["legend.fontsize"] = 6
     plt.rcParams["grid.alpha"] = 0.3
 
     # Seaborn style
@@ -47,7 +47,14 @@ def plot_game_rounds(df: pd.DataFrame, lower_bound, upper_bound, log: bool = Fal
         log (bool): Whether to plot the log-transformed values.
     """
     if not log:  # Raw scale
-        sns.boxplot(x="version", y="sum_gamerounds", data=df, hue="version", width=0.5)
+        sns.boxplot(
+            x="version",
+            y="sum_gamerounds",
+            data=df,
+            hue="version",
+            width=0.5,
+            linewidth=0.7,
+        )
         plt.title("Distribution of Game Rounds by Version")
         plt.xlabel("Game Version")
         plt.ylabel("Game Rounds")
@@ -63,6 +70,7 @@ def plot_game_rounds(df: pd.DataFrame, lower_bound, upper_bound, log: bool = Fal
             data=df,
             hue="version",
             width=0.5,
+            linewidth=0.7,
         )
         plt.title("Distribution of Game Rounds by Version (log scale)")
         plt.xlabel("Game Version")
@@ -94,7 +102,7 @@ def plot_assignment_counts(df: pd.DataFrame):
             textcoords="offset points",
             ha="center",
             va="center",
-            fontsize=10,
+            fontsize=8,
             color="white",
             fontweight="bold",
         )
@@ -160,7 +168,7 @@ def plot_retention_rates(df: pd.DataFrame):
             textcoords="offset points",
             ha="center",
             va="center",
-            fontsize=10,
+            fontsize=8,
             color="white",
             fontweight="bold",
         )
@@ -186,7 +194,7 @@ def plot_retention_rates(df: pd.DataFrame):
             textcoords="offset points",
             ha="center",
             va="center",
-            fontsize=10,
+            fontsize=8,
             color="white",
             fontweight="bold",
         )
@@ -280,17 +288,18 @@ def prepare_axes_power_vs_mde(p0, nob, alpha):
 def plot_power_vs_mde(p0, nob, mde_pp_current, alpha):
     axes = prepare_axes_power_vs_mde(p0, nob, alpha)
 
-    plt.plot(axes[0], axes[1], color="#6B46C1", linewidth=2)
-    plt.axhline(0.8, linestyle="--", linewidth=1, color="#63B3ED")
+    plt.plot(axes[0], axes[1], color="#6B46C1", linewidth=1)
+    plt.axhline(0.8, linestyle="--", linewidth=0.5, color="#63B3ED")
 
     # Add point for current MDE
-    plt.scatter([mde_pp_current], [0.80], color="#3182CE", zorder=5)
+    plt.scatter([mde_pp_current], [0.80], s=10, color="#3182CE", zorder=5)
     plt.text(
-        mde_pp_current + 0.3,
+        mde_pp_current + 0.35,
         0.72,
         f"Current MDE = {mde_pp_current:.2f} pp",
         ha="center",
         color="#3182CE",
+        fontsize=7,
     )
 
     # Format y-axis as percentages
@@ -330,14 +339,15 @@ def prepare_axes_mde_vs_sample(p0, alpha, power):
 def plot_mde_vs_sample(p0, alpha, power, n, mde_pp_current):
     axes = prepare_axes_mde_vs_sample(p0, alpha, power)
 
-    plt.plot(axes[0], axes[1], color="#6B46C1", linewidth=2)
-    plt.scatter([n], [mde_pp_current], color="#3182CE", zorder=5)
+    plt.plot(axes[0], axes[1], color="#6B46C1", linewidth=1)
+    plt.scatter([n], [mde_pp_current], s=10, color="#3182CE", zorder=5)
     plt.text(
-        n + 25000,
+        n + 3000,
         mde_pp_current + 0.1,
         f"Current N = {n}, MDE = {mde_pp_current:.2f} pp",
-        ha="center",
+        ha="left",
         color="#3182CE",
+        fontsize=7,
     )
 
     plt.xlabel("N per Group")
