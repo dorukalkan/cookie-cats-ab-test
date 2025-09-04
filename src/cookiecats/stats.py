@@ -14,7 +14,7 @@ from statsmodels.stats.proportion import (
 
 
 # Function to test SRM
-def test_srm_chi2(df: pd.DataFrame, control_players: int, treatment_players: int):
+def test_srm_chi2(control_players: int, treatment_players: int):
     # Calculate total players
     total_players = control_players + treatment_players
 
@@ -82,3 +82,61 @@ def solve_required_n(alpha: float, power: float, p0: float):
         )
 
     return pd.DataFrame(rows)
+
+
+def test_two_prop_z(df, ctrl, treat, col, alpha, p0):
+    # Successes = players retained at day-7
+    success_ctrl = df[df["version"] == "gate_30"][col].sum()
+    success_treat = df[df["version"] == "gate_40"][col].sum()
+
+    successes = [success_ctrl, success_treat]
+    nobs = [ctrl, treat]
+
+    # Two-proportion z-test
+    z_stat, pval = proportions_ztest(successes, nobs, alternative="two-sided")
+
+    # Confidence intervals for each group
+    (ci_ctrl_low, ci_ctrl_high) = proportion_confint(
+        success_ctrl, ctrl, alpha=alpha, method="wilson"
+    )
+    (ci_treat_low, ci_treat_high) = proportion_confint(
+        success_treat, treat, alpha=alpha, method="wilson"
+    )
+
+    # Calculate observed proportions and difference
+    prop_ctrl = success_ctrl / ctrl
+    prop_treat = success_treat / treat
+    delta = prop_treat - prop_ctrl
+    delta_abs_pp = delta * 100
+
+    # Confidence intervals for the difference
+    (ci_delta_low, ci_delta_high) = confint_proportions_2indep(
+        success_treat,
+        treat,
+        success_ctrl,
+        ctrl,
+        method="score",
+    )
+
+    # Calculate relative change
+    delta_rel_pct = (prop_treat / prop_ctrl - 1) * 100
+
+    # Cohen's h
+    p1 = df[df["version"] == "gate_40"][col].mean()
+    h = proportion_effectsize(p0, p1)
+
+    return (
+        prop_ctrl,
+        ci_ctrl_low,
+        ci_ctrl_high,
+        prop_treat,
+        ci_treat_low,
+        ci_treat_high,
+        z_stat,
+        pval,
+        delta_abs_pp,
+        ci_delta_low,
+        ci_delta_high,
+        delta_rel_pct,
+        h,
+    )
