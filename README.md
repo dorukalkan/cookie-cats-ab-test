@@ -81,19 +81,18 @@ While the result is statistically significant, the effect is negative and below 
 
 Per 100k installs, the test result indicates **820 fewer players** retained by day 7, with the true impact likely between 312 and 1328 fewer players (95% confidence). Assuming an ARPU of $0.50 a month, that means **~$410  monthly revenue loss** per 100k installs.
 
-## Limitations & Next Steps
+## Recommendations
 
-The dataset does not indicate whether players actually reached the gate level. Some players may not have been exposed, which can dilute test results. Sensitivity analysis implies that the observed effect of day-7 retention would be -1.64 pp with 95% [-2.66, 0.62] if only half the players have reached the gate level (see [report](reports/report.pdf)). Future experiments should condition on gate exposure.
-
-[See the exposure sensitivity table](reports/exposure_sensitivity.csv)
+- Include covariates (region, platform, spend) for adjusted models.
+- Timestamps to perform time-to-event analysis.
+- Track exposure (whether a player actually reached the gate) for diagnostic analysis.
 
 ## Repository Structure
 
 - `notebook/cookie_cats.ipynb`: main notebook containing EDA, sanity checks, tests, visualization
 - `reports/results_table.csv`: experiment results table as CSV
-- `reports/exposure_sensitivity.csv`: sensitivity analysis results table as CSV
 - `reports/report.pdf`: experiment report as PDF
-- `reports/figures/`: plots folder (png images)
+- `reports/figures/`: plots folder (PNG images)
 
 ## How to Run
 
