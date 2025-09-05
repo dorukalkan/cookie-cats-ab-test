@@ -16,7 +16,7 @@ Impact of moving a mobile game progression gate on retention & engagement
 
 **Decision:** _Do not roll out._ While the result is statistically significant, the effect is negative and below the practical threshold.
 
-[See the report](reports/report.pdf)
+[View the report](reports/report.pdf)
 
 ## Dataset
 
@@ -69,7 +69,7 @@ Chi-square _p_ = 0.008 passes SRM check but it is in a cautionary range.
 - Guardrail p-values are Holm-adjusted.
 - Cohen’s _h_ = 0.02 for the primary metric, which is negligible in standardized magnitude (below the conventional threshold of 0.20 for a small effect).
 
-[See the table in detail](reports/results_table.csv)
+[View the table in detail](reports/results_table.csv)
 
 **Interpretation:**  
 The difference in primary metric (`retention_7`) is statistically significant (_p_ = 0.0016). The treatment group (`gate_40`) shows a −0.82 pp decrease in day-7 retention compared to control (`gate_30`) with 95% CI [-1.33, -0.31] pp, corresponding to a -4.3% relative drop.
