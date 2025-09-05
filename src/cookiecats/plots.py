@@ -63,6 +63,9 @@ def plot_game_rounds(df: pd.DataFrame, lower_bound, upper_bound, log: bool = Fal
         plt.show()
 
     else:
+        # Create a column to log-transform sum_gamerounds
+        df.loc[:, "log_sum_gamerounds"] = np.log1p(df["sum_gamerounds"])
+
         # Plot game rounds distributions by version
         sns.boxplot(
             x="version",
