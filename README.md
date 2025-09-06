@@ -96,6 +96,16 @@ Per 100k installs, the test result indicates **820 fewer players** retained by d
 
 ## How to Run
 
+Clone the repository:
+
+```
+git clone https://github.com/dorukalkan/cookie-cats-ab-test.git
+```
+
+Create a `data` directory at the repo root. Download the dataset from [Kaggle](https://www.kaggle.com/datasets/mursideyarkin/mobile-games-ab-testing-cookie-cats) into `data`.
+
+Then run:
+
 ```
 pip install -r requirements.txt
 jupyter notebook cookie_cats.ipynb
