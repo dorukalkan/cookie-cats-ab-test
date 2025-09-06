@@ -80,7 +80,7 @@ The difference in primary metric (`retention_7`) is statistically significant (_
 While the result is statistically significant, the effect is negative and below the practical threshold of 1.0 pp. Cohen's _h_ = 0.02 indicates that the magnitude of this effect is negligible. Even though this negative effect is minimal, rollout is not recommended.
 
 ![Retention bar chart](reports/figures/4.3_retention_rates_by_version_95_ci.png)
-[View plots appendix](https://github.com/dorukalkan/cookie-cats-ab-test/tree/main/reports/figures/README.md)
+[View the appendix of plots](reports/figures/README.md)
 
 ## Business Impact
 
