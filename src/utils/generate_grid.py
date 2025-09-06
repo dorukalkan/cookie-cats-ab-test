@@ -6,10 +6,10 @@ def generate_grid(img_path1, img_path2, img_path3, img_path4, output_path):
     Generate a 2x2 grid of images with varying sizes, centering each image in its cell.
     """
     # Open images
-    img1 = Image.open(img_path1)  # 833 x 548
-    img2 = Image.open(img_path2)  # 984 x 584
-    img3 = Image.open(img_path3)  # 856 x 548
-    img4 = Image.open(img_path4)  # 984 x 584
+    img1 = Image.open(img_path1)
+    img2 = Image.open(img_path2)
+    img3 = Image.open(img_path3)
+    img4 = Image.open(img_path4)
 
     # Get individual image sizes
     w1, h1 = img1.size
