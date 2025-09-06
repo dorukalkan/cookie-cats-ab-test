@@ -86,7 +86,7 @@ While the result is statistically significant, the effect is negative and below 
 
 Per 100k installs, the test result indicates **820 fewer players** retained by day 7, with the true impact likely between 312 and 1328 fewer players (95% confidence). Assuming an ARPU of $0.50 a month, that means **~$410  monthly revenue loss** per 100k installs.
 
-## Recommendations
+## Limitations & Next Steps
 
 - Include covariates (region, platform, spend) for adjusted models.
 - Timestamps to perform time-to-event analysis.
