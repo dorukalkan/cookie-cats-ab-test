@@ -37,7 +37,7 @@ def build_results_table(
             "Effect size": f"Cohen's h = {ret1_results[12]:.2f}",
             "Statistic": f"z = {ret1_results[6]:.2f}",
             "p-value": f"{ret1_results[7]:.4f}",
-            "Adjusted p-value": guardrail_adj[1][0],
+            "Adjusted p-value": f"{guardrail_adj[1][0]:.6f}",
             "Significant?": "Yes" if guardrail_adj[1][0] < alpha else "No",
         }
     )
