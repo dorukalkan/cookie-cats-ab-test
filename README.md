@@ -102,7 +102,7 @@ Clone the repository:
 git clone https://github.com/dorukalkan/cookie-cats-ab-test.git
 ```
 
-Create a `data` directory at the repo root. Download the dataset from [Kaggle](https://www.kaggle.com/datasets/mursideyarkin/mobile-games-ab-testing-cookie-cats) into `data`.
+Create a new `data` directory at the repo root. Download the dataset from [Kaggle](https://www.kaggle.com/datasets/mursideyarkin/mobile-games-ab-testing-cookie-cats) into `data`.
 
 Then run:
 
