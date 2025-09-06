@@ -80,6 +80,7 @@ The difference in primary metric (`retention_7`) is statistically significant (_
 While the result is statistically significant, the effect is negative and below the practical threshold of 1.0 pp. Cohen's _h_ = 0.02 indicates that the magnitude of this effect is negligible. Even though this negative effect is minimal, rollout is not recommended.
 
 ![Retention bar chart](reports/figures/4.3_retention_rates_by_version_95_ci.png)
+[View plots appendix](https://github.com/dorukalkan/cookie-cats-ab-test/tree/main/reports/figures/README.md)
 
 ## Business Impact
 
@@ -94,9 +95,11 @@ Per 100k installs, the test result indicates **820 fewer players** retained by d
 ## Repository Structure
 
 - `notebook/cookie_cats.ipynb`: main notebook containing EDA, sanity checks, tests, visualization
+- `src/cookiecats/`: data loading, plotting, analysis, results table scripts
+- `src/utils/`: helper script to generate 2x2 grid image from plots
 - `reports/results_table.csv`: experiment results table as CSV
 - `reports/report.pdf`: experiment report as PDF
-- `reports/figures/`: plots folder (PNG images)
+- `reports/figures/`: plots folder (PNG images) and appendix
 
 ## How to Run
 
