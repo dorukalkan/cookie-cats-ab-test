@@ -1,3 +1,7 @@
+![Report](https://img.shields.io/badge/Report-PDF-green)
+![Python](https://img.shields.io/badge/Python-3.11-blue)
+![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)
+
 # Cookie Cats A/B Test Analysis
 
 Impact of moving a mobile game progression gate on retention & engagement
