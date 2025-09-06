@@ -1,8 +1,7 @@
 # Data files
 data/
 
-# Misc. files
-utils/
+# Report markdown
 report.md
 
 # Byte-compiled / optimized / DLL files
